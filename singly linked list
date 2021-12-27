@@ -1,0 +1,200 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+struct Node
+{
+	int data;
+	struct Node *next;
+} *node=NULL, *newNode, *tempNode, *lastNode;
+
+struct Node *createNode(int data)
+{
+	struct Node *newNode = (struct Node *)malloc(sizeof(struct Node));
+	newNode->data = data;
+	newNode->next = NULL;
+	return newNode;
+}
+
+
+void insertAtEnd(int data)
+{
+	newNode = createNode(data);
+	if (node == NULL)
+	{
+		node = newNode;
+	}
+	else
+	{
+		lastNode = node;
+		while(lastNode->next != NULL)
+		{
+			lastNode = lastNode->next;
+		}
+		lastNode->next = newNode;
+	}
+}
+
+void deleteAtLocation()
+{
+  if (node == NULL)
+	{
+		printf("List is Empty\n");
+	}
+  else
+  {
+    int loc, i;
+		printf("Enter the location is to be deleted ");
+		scanf("%d", &loc);
+			
+		tempNode = node;
+		if(loc == 1 )
+		{
+			node=node->next;
+		}
+    else
+    {
+    for(i=2;i < loc;i++)
+    tempNode = tempNode->next;
+    tempNode -> next = tempNode->next->next;
+    }
+  }
+}
+void deleteSpecificData()
+{
+	if (node == NULL)
+	{
+		printf("List is Empty\n");
+	}
+	else
+	{
+		int data;
+		printf("Enter the data which is to be deleted ");
+		scanf("%d", &data);
+			
+		lastNode = node;
+		if(node->data == data )
+		{
+			node=node->next;
+		}
+		while(lastNode->next != NULL)
+		{
+      if(lastNode->next-> data == data)
+        lastNode->next = lastNode->next->next;
+      else
+			lastNode = lastNode->next;
+		}			
+    }
+}
+
+void deleteDataAndNext()
+{
+	if (node == NULL)
+	{
+		printf("List is Empty\n");
+	}
+	else
+	{
+		int data;
+		printf("Enter the data which is to be deleted and next");
+		scanf("%d", &data);
+			
+		lastNode = node;
+		if(node->data == data )
+		{
+			node=node->next->next;
+		}
+		while(lastNode->next != NULL)
+		{
+      if(lastNode->next-> data == data)
+        lastNode->next = lastNode->next->next->next;
+      else
+			lastNode = lastNode->next;
+		}			
+    }
+}
+
+void Memory()
+{
+  tempNode = node;
+	if(tempNode == NULL)
+	{
+		printf("0 bytes\n");
+	}
+	else
+	{
+    int size = 8, total = 0;
+		while(tempNode != NULL)
+		{
+			total += size;
+			tempNode = tempNode->next;
+		}
+    printf("%d bytes\n",total);
+	}
+  
+}
+
+void display()
+{
+	tempNode = node;
+	if(tempNode == NULL)
+	{
+		printf("List is Empty\n");
+	}
+	else
+	{
+		while(tempNode != NULL)
+		{
+			if (tempNode->next != NULL)
+				printf("%d -> ", tempNode->data);
+			else
+				printf("%d\n", tempNode->data);
+			tempNode = tempNode->next;
+		}
+	}
+}
+
+void Exit()
+{
+	exit(0);
+}
+
+int main()
+{
+	int data, choice;
+	printf("\nSINGLY LINKED LIST\n");
+	while(1)
+	{
+		printf("1.Insert At End\n2.Delete at Location\n3.Delete Specific Data\n4.Memory Space\n5.Delete specific data and next\n6.Display\n7.Exit\n\nEnter your choice ");
+		scanf("%d", &choice);
+		switch(choice)
+		{
+			case 1:
+			    printf("Enter the data to be inserted ");
+			    scanf("%d", &data);
+			    insertAtEnd(data);
+			    break;
+      case 2:
+          deleteAtLocation();
+          break;
+      case 3:
+			    deleteSpecificData();
+			    break;
+      case 4:
+          Memory();
+          break;
+      case 5:
+          deleteDataAndNext();
+          break;
+			case 6:
+			    display();
+			    break;
+			case 7:
+			    Exit();
+			    break;
+			default:
+			    printf("\nInvalid Input\n");
+			    Exit();
+		}
+	}
+	return 0;
+}
