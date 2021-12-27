@@ -1,0 +1,12 @@
+T = int(input())
+lis = []
+for t in range(T):
+  e = list(map(int, input().split()))
+  lis.append(e)
+
+for i in lis:
+  n, k = i[0], i[1]
+  if (k * k) <= n and (n + k) % 2 == 0:
+    print("YES")
+  else:
+    print("NO")
